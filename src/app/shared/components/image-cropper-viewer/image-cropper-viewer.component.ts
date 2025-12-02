@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ImageCropperComponent as ICComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 
 @Component({
-  selector: 'app-image-cropper',
-  templateUrl: './image-cropper.component.html',
-  styleUrl: './image-cropper.component.scss',
+  selector: 'app-image-cropper-viewer',
+  templateUrl: './image-cropper-viewer.component.html',
+  styleUrl: './image-cropper-viewer.component.scss',
 })
-export class ImageCropperComponent {
+export class ImageCropperViewerComponent {
   imageChangedEvent: Event | null = null;
   croppedImage: SafeUrl = '';
 
@@ -17,7 +17,10 @@ export class ImageCropperComponent {
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
+    if (event.objectUrl)
+      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(
+        event.objectUrl
+      );
     // event.blob can be used to upload the cropped image
   }
   imageLoaded(image: LoadedImage) {

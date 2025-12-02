@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
+import { ImageCropperViewerComponent } from '../image-cropper-viewer/image-cropper-viewer.component';
 
 @Component({
   selector: 'app-dialog',
@@ -11,7 +11,7 @@ export class DialogComponent {
   readonly dialog = inject(MatDialog);
 
   openDialog() {
-    const dialogRef = this.dialog.open(ImageCropperComponent);
+    const dialogRef = this.dialog.open(ImageCropperViewerComponent);
 
     dialogRef.afterClosed().subscribe((res) => {
       console.log('res', res);
